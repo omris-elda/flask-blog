@@ -2,12 +2,9 @@
 {% block body_content %}
 
 	<h1>{{title}}</h1>
-	{%for post in posts %}
-		<div>
-			<h3>{{ post.title }}</h3>
-			<p><b> - First Name: </b>{{ post.name.first }}</p>
-			<p><b> - Last Name: </b>{{ post.name.last }}</p>
-			<p> -- {{ post.content }}</p>
-		</div>
+	<p>Welcome to this mess of a web app.</p>
+	<div>
+		<h3>{{ post.title }}</h3>
+	</div>
 	{% endfor %}
 {% endblock %}
