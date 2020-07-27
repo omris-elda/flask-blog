@@ -14,7 +14,7 @@ def home():
 def about():
     return render_template("about.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for("home"))
