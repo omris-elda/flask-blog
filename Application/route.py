@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template, redirect
 from Application import app, db, bcrypt
 from Application.models import Posts, Users
 from Application.forms import PostForm, RegistrationForm
