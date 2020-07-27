@@ -21,11 +21,7 @@ def login():
 def register():
     return render_template("register.html")
 
-@app.route("/new-post")
-def new_post():
-    return render_template("new-post.html")
-
-@app.route("/post")
+@app.route("/newpost")
 def post():
     form = PostForm()
     if form.validate_on_submit():
@@ -40,4 +36,4 @@ def post():
         return redirect(url_for("home"))
     else:
         print(form.errors)
-    return render_template("post.html", title="Post", form=form)
+    return render_template("newpost.html", title="Post", form=form)
