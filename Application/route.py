@@ -18,7 +18,7 @@ def about():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for("home"))
-    form = LoginForm
+    form = LoginForm()
     if form.validate_on_submit():
         user=Users.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
@@ -50,7 +50,7 @@ def post():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit(self):
+    if form.validate_on_submit():
         hash_pw = bcrypt.generate_password_hash(form.password.data)
         user = Users(email=form.email.data, password=hash_pw)
 
