@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 from os import getenv
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 app = Flask(__name__)
 
