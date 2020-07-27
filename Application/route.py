@@ -50,7 +50,7 @@ def post():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit(self):
         hash_pw = bcrypt.generate_password_hash(form.password.data)
         user = Users(email=form.email.data, password=hash_pw)
 
