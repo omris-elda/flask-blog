@@ -1,4 +1,3 @@
-
 from Application import db
 
 class Posts(db.Model):
