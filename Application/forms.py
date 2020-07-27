@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from Application.models import Users
+from Application.models import Users, Posts
 
 class PostForm(FlaskForm):
     first_name = StringField("First Name",
@@ -47,3 +47,16 @@ class RegistrationForm(FlaskForm):
         user = Users.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError("Email is already in use")
+
+class LoginForm(FlaskForm):
+    email = StringField("Email",
+    validators=[
+        DataRequired(),
+        Email()
+    ])
+    password = PasswordField("Password", 
+    validators=[
+        DataRequired()
+    ])
+    remember = BooleanField("Remember Me")
+    submit = SubmitField("Login")
