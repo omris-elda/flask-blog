@@ -6,7 +6,7 @@
         {{ form.hidden_tag() }}
         {{ form.first_name.label }}
         {{ form.first_name }}
-        {% if form.firstn_name.errors %}
+        {% if form.first_name.errors %}
             <div class="error">
                 {% for error in form.first_name.errors %}
                     <span>{{ error }}</span>
@@ -19,7 +19,7 @@
         {% if form.last_name.errors %}
             <div class="error">
                 {% for error in form.last_name.errors %}
-                    <span>{{error}</span>
+                    <span>{{ error }}</span>
                 {% endfor %}
             </div>
         {% endif %}
@@ -39,7 +39,7 @@
         {% if form.content.errors %}
             <div class="error">
                 {% for error in form.content.errors %}
-                    <span>{{error}}</span>
+                    <span>{{ error }}</span>
                 {% endfor %}
             </div>
         {% endif %}

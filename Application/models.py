@@ -13,3 +13,11 @@ class Posts(db.Model):
             "Title: ", self.title, "\r\n", self.content
             ])
 
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.string(100), nullable=False, unique=True)
+    password = db.Column(db.string(500), nullable=False)
+
+    def __repr__(self):
+        return "".join(["UserID: ", str(self.id), "\r\n", "Email: ", self.email])
+
