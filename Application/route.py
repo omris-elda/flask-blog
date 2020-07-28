@@ -90,11 +90,14 @@ def edit_account():
 @login_required
 
 def delete_account():
-    user = current_user.id
-    account = Users.query.filter_by(id=user).first()
-    posts = Posts.query.filter_by(user_id=user).all()
-    db.session.delete(posts)
-    logout_user()
-    db.session.delete(account)
-    db.session.commit()
-    return redirect(url_for("register"))
+    if current_user.is_authenticated:
+        user = current_user.id
+        account = Users.query.filter_by(id=user).first()
+        posts = Posts.query.filter_by(user_id=user).all()
+        db.session.delete(posts)
+        logout_user()
+        db.session.delete(account)
+        db.session.commit()
+        return redirect(url_for("register"))
+    else:
+        return redirect(url_for("home"))
