@@ -45,12 +45,12 @@
             {{ form.submit }}
         </div>
             <br>
-        <div class="form_group">
-            <form action=" {{ url_for('delete_account') }} ">
-                <button type="submit">Delete your account</button>
-            </form>
-        </div>
     </form>
+    <div class="form_group">
+        <form action=" {{ url_for('delete_account') }} ">
+            <button type="submit">Delete your account</button>
+        </form>
+    </div>
 </div>
 
 {% endblock %}
