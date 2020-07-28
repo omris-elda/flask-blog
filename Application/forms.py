@@ -4,16 +4,6 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from Application.models import Users, Posts
 
 class PostForm(FlaskForm):
-    first_name = StringField("First Name",
-    validators = [
-        DataRequired(),
-        Length(min=2, max=30)
-    ])
-    last_name = StringField("Last Name",
-    validators = [
-        DataRequired(),
-        Length(min=2, max=30)
-    ])
     title = StringField("Title",
     validators = [
         DataRequired(),
@@ -40,6 +30,16 @@ class RegistrationForm(FlaskForm):
     validators = [
         DataRequired(),
         EqualTo("password")
+    ])
+    first_name = StringField("First Name",
+    validators = [
+        DataRequired(),
+        Length(min=2, max=30)
+    ])
+    last_name = StringField("Last Name",
+    validators = [
+        DataRequired(),
+        Length(min=2, max=30)
     ])
     submit = SubmitField("Sign Up")
 
