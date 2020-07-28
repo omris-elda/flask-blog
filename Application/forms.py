@@ -63,7 +63,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 class UpdateAccountForm(FlaskForm):
-        email = StringField("Email",
+    email = StringField("Email",
     validators = [
         DataRequired(),
         Email()
@@ -73,7 +73,7 @@ class UpdateAccountForm(FlaskForm):
         DataRequired(),
         Length(min=2, max=30)
     ])
-    last_name = StringField("Last Name",
+    last_name = StringField("Last Name", 
     validators = [
         DataRequired(),
         Length(min=2, max=30)
