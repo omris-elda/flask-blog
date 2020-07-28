@@ -29,7 +29,7 @@ class Users(db.Model, UserMixin):
 
     def __repr__(self):
         return "".join(["UserID: ", str(self.id), "\r\n", 
-        "Email: ", self.email,
+        "Email: ", self.email, "\r\n",
         "Name: ", self.first_name, " ", self.last_name
         ])
 
