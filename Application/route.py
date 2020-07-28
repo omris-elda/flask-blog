@@ -86,3 +86,15 @@ def edit_account():
         form.email.data = current_user.email
     return render_template("edit_account.html", title="Edit Account", form=form, name=current_user.first_name)
 
+@app.route("/delete-account")
+@login_required
+
+def delete_account():
+    user = current_user.id
+    account = Users.query.filter_by(id=user).first()
+    posts = Posts.query.filter_by(user_id=user).all()
+    db.session.delete(posts)
+    logout_user()
+    db.session.delete(account)
+    db.session.commit()
+    return redirect(url_for("register"))
