@@ -95,7 +95,8 @@ def delete_account():
         user = current_user.id
         account = Users.query.filter_by(id=user).first()
         posts = Posts.query.filter_by(user_id=user).all()
-        db.session.delete(posts)
+        for post in posts:
+            db.session.delete(post)
         logout_user()
         db.session.delete(account)
         db.session.commit()
