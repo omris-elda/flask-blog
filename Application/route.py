@@ -68,3 +68,20 @@ def register():
 def logout():
     logout_user()
     return redirect(url_for("login"))
+
+@app.route("/edit_account")
+
+def edit_account():
+    form = UpdateAccountForm()
+    if form.validate_on_submit:
+        current_user.first_name = form.first_name.data
+        current_user.last_name = form.first_name.data
+        current_user.email = form.email.data
+        db.session.commit()
+        return redirect(url_for("edit_account"))
+    elif request.method == "GET":
+        form.first_name.data = current_user.first_name
+        form.last_name.data = current_user.last_name
+        form.email.data = current_user.email
+    return render_template("edit_account.html", title="Edit Account", name=current_user.first_name, form=form)
+

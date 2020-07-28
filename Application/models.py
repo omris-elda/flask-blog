@@ -15,7 +15,6 @@ class Posts(db.Model):
             "Title: ", self.title, "\r\n", self.content
             ])
 
-
 @login_manager.user_loader
 def load_user(id):
     return Users.query.get(int(id))
