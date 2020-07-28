@@ -76,7 +76,7 @@ def edit_account():
     form = UpdateAccountForm()
     if form.validate_on_submit():
         current_user.first_name = form.first_name.data
-        current_user.last_name = form.first_name.data
+        current_user.last_name = form.last_name.data
         current_user.email = form.email.data
         db.session.commit()
         return redirect(url_for("edit_account"))
