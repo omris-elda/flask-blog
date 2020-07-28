@@ -86,7 +86,7 @@ def edit_account():
         form.email.data = current_user.email
     return render_template("edit_account.html", title="Edit Account", form=form, name=current_user.first_name)
 
-@app.route("edit_account/delete_account", methods=["GET", "POST"])
+@app.route("/edit_account/delete_account", methods=["GET", "POST"])
 @login_required
 
 def delete_account():
