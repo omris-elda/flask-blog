@@ -70,6 +70,7 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/edit_account")
+@login_required
 
 def edit_account():
     form = UpdateAccountForm()
