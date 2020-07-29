@@ -139,28 +139,170 @@ class TestUnAuthPost(TestBase):
             )
             self.assertIn(b"Login Page", response.data)
 
-# class TestAccountDelete(TestBase):
-# this should test that when you delete your account it redirects you properly
+class TestAccountDelete(TestBase):
+# this should test that when you delete your account it redirects you properly,
+# whether you're authenticated or not
+    def test_deleteaccount(self):
+        with self.client:
+            first_response = self.client.get(
+                '/edit_account/delete_account',
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", first_response.data)
 
-# class TestEmailInUse(TestBase):
+            self.client.post(
+                url_for('login'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            second_response = self.client.get(
+                '/edit_account/delete_account',
+                follow_redirects = True
+            )
+            self.assertIn(b"Register", second_response.data)
+
+class TestEmailInUse(TestBase):
 # this will test to see if the correct error message comes up
 # if you try to use an email that's already in use
+    def test_email_in_use(self):
+        with self.client:
+            response = self.client.post(
+                url_for('register'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password",
+                    confrim_password = "password",
+                    first_name = "Testing",
+                    last_name = "Users"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Email is already in use", response.data)
 
-# class TestEditAccountEmailInUse(TestBase):
+class TestEditAccountEmailInUse(TestBase):
 # this will test to see if the correct error message comes up
 # if you try to use an email that's already in use when you edit your account
+    def test_edit_email_in_use(self):
+        with self.client:
+            self.client.post(
+                url_for('login'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            response = self.client.post(
+                url_for('edit_account'),
+                data = dict(
+                    email = "admin@admin.com",
+                    first_name = "Testing",
+                    last_name = "Users"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"Email already in use", response.data)
 
-# class TestEditAccount(TestBase):
+class TestEditAccount(TestBase):
 # this will test the editing account function
+    def test_edit_account(self):
+        with self.client:
+            first_response = self.client.get(
+                '/edit_account',
+                follow_redirects = True
+            )
+            self.assertIn(b"Login", first_response.data)
 
-# class TestAuthUserRegister(TestBase):
+            self.client.post(
+                url_for('login'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            response = self.client.post(
+                '/edit_account',
+                data = dict(
+                    email = "test@user.com",
+                    first_name = "NewName",
+                    last_name = "Alsonewname"
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"NewName", response.data)
+class TestAuthUserRegister(TestBase):
 # this will test a user who's already logged in trying to register
+    def test_authuserreg(self):
+        with self.client:
+            self.client.post(
+                url_for('login'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            response = self.client.get(
+                '/register',
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
 
-# class TestEmptyPost(TestBase):
-# this will test for an empty post
 
-# class TestAuthLogin(TestBase):
+class TestEmptyPost(TestBase):
+# this will test for a post that doesn't have enough chars in
+    def test_add_new_post(self):
+        with self.client:
+            self.client.post(
+                url_for('login'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+
+            response = self.client.post(
+                url_for('post'),
+                data = dict(
+                    title = " ", 
+                    content = " "
+                ),
+                follow_redirects = True
+            )
+            self.assertIn(b"This field is required.", response.data)
+            self.assertIn(b"Field must be between 2 and 500 characters long.", response.data)
+
+
+class TestAuthLogin(TestBase):
 # this will test a logged in user trying to log in
+    def test_authlogin(self):
+        with self.client:
+            self.client.post(
+                url_for('login'),
+                data = dict(
+                    email = "test@user.com",
+                    password = "password"
+                ),
+                follow_redirects = True
+            )
+            response = self.client.get(
+                '/login',
+                follow_redirects = True
+            )
+            self.assertIn(b"Home", response.data)
 
-# class TestAboutPage(TestBase):
+
+class TestAboutPage(TestBase):
 # this will test the about page
+    def test_about(self):
+        with self.client:
+            response = self.client.get(
+                '/about',
+                follow_redirects = True
+            )
+            self.assertIn(b"About", response.data)
