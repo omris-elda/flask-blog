@@ -31,13 +31,14 @@ def login():
     return render_template("login.html", title="Login", form=form)
 
 @app.route("/newpost", methods=["GET", "POST"])
+@login_required
 def post():
     form = PostForm()
     if form.validate_on_submit():
         postData = Posts(
             title = form.title.data,
             content = form.content.data,
-            author = current_user
+            author=current_user
         )
         db.session.add(postData)
         db.session.commit()
