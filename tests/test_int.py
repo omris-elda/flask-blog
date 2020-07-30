@@ -19,7 +19,7 @@ class TestBase(LiveServerTestCase):
     # this is the class we'll inherit from before every test so that you start with an empty database
 
     def create_app(self):
-        config_name = "testing"
+        # config_name = "testing"
         app.config["SQLALCHEMY_DATABASE_URI"]=getenv("TEST_DB_URI_SECOND")
         app.config["SECRET_KEY"]=getenv("TEST_SECRET_KEY") or "testing"
         return app
@@ -29,11 +29,13 @@ class TestBase(LiveServerTestCase):
 
         print("<-----NEXT-TEST----->")
         chrome_options = Options()
-        chrome_options.binary_location = "L:\CA Learning\chrome-win\chrome.exe"
+        chrome_options.binary_location = "/l/CA\ Learning/mini_installer.exe"
+        # /usr/bin/chromium-browser
         chrome_options.add_argument("--headless")
         # this command just means that it will do everything in the background, instead of
         # actually opening a browser and showing you what it's doing
-        self.driver = webdriver.Chrome(executable_path="L:\CA Learning\chromedriver.exe", chrome_options=chrome_options)
+        self.driver = webdriver.Chrome(executable_path="/l/CA\ Learning/flask-blog/chromedriver.exe", chrome_options=chrome_options)
+        # /home/edmundtheeel/chromedriver
         self.driver.get("http://localhost:5000")
         db.session.commit()
         db.drop_all()
@@ -67,9 +69,14 @@ class TestRegistration(TestBase):
         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[4]/input").send_keys(test_admin_first_name)
         # find and input the first name field
         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[5]/input").send_keys(test_admin_last_name)
+        # find and input the last name field
         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[6]/input").click()
+        # find and click on the submit button
 
         assert url_for('login') in self.driver.current_url
 
-        if __name__ == "__main__":
-            unittest.main(port=5000)
+if __name__ == "__main__":
+    unittest.main(port=5000)
+
+
+    
