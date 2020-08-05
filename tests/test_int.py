@@ -51,32 +51,32 @@ class TestBase(LiveServerTestCase):
 
 
 
-class TestRegistration(TestBase):
-    def test_registration(self):
-        # tests that a user can create an account
-        # using the registration form
-        # and that if all fields are filled in correctly
-        # they'll be redirected to the login page
+# class TestRegistration(TestBase):
+#     def test_registration(self):
+#         # tests that a user can create an account
+#         # using the registration form
+#         # and that if all fields are filled in correctly
+#         # they'll be redirected to the login page
 
-        self.driver.find_element_by_xpath("/html/body/div[1]/nav/a[5]").click()
-        # this navigates to the nav register button in the nav bar
-        self.driver.find_element_by_xpath("/html/body/div[2]/form/div[1]/input").send_keys(test_admin_email)
-        # this inputs the test_admin_email into the email input part of the form
-        self.driver.find_element_by_xpath("/html/body/div[2]/form/div[2]/input").send_keys(test_admin_password)
-        # find the password field
-        self.driver.find_element_by_xpath("/html/body/div[2]/form/div[3]/input").send_keys(test_admin_password)
-        # find the confirm password field, both of these input test_admin_password
-        self.driver.find_element_by_xpath("/html/body/div[2]/form/div[4]/input").send_keys(test_admin_first_name)
-        # find and input the first name field
-        self.driver.find_element_by_xpath("/html/body/div[2]/form/div[5]/input").send_keys(test_admin_last_name)
-        # find and input the last name field
-        self.driver.find_element_by_xpath("/html/body/div[2]/form/div[6]/input").click()
-        # find and click on the submit button
+#         self.driver.find_element_by_xpath("/html/body/div[1]/nav/a[5]").click()
+#         # this navigates to the nav register button in the nav bar
+#         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[1]/input").send_keys(test_admin_email)
+#         # this inputs the test_admin_email into the email input part of the form
+#         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[2]/input").send_keys(test_admin_password)
+#         # find the password field
+#         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[3]/input").send_keys(test_admin_password)
+#         # find the confirm password field, both of these input test_admin_password
+#         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[4]/input").send_keys(test_admin_first_name)
+#         # find and input the first name field
+#         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[5]/input").send_keys(test_admin_last_name)
+#         # find and input the last name field
+#         self.driver.find_element_by_xpath("/html/body/div[2]/form/div[6]/input").click()
+#         # find and click on the submit button
 
-        assert url_for('login') in self.driver.current_url
+#         assert url_for('login') in self.driver.current_url
 
-if __name__ == "__main__":
-    unittest.main(port=5000)
+# if __name__ == "__main__":
+#     unittest.main(port=5000)
 
 
     
